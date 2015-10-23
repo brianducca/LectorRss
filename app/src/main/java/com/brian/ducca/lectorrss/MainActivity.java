@@ -17,13 +17,19 @@
  */
 package com.brian.ducca.lectorrss;
 
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,19 +38,25 @@ import java.util.List;
  * @author  Brian Ducca
  * @version 1.0
  */
-public class MainActivity extends AppCompatActivity implements Handler.Callback,Clickeable {
+public class MainActivity extends AppCompatActivity implements Handler.Callback,Clickeable,View.OnClickListener {
 
     private Handler h;
-
+    private RecyclerView recycler;
+    private List<Noticia> milista;
+    private MyAdapter adap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         h = new Handler(this);
-        ThreadConexion tc = new ThreadConexion("http://cdn01.ib.infobae.com/adjuntos/162/rss/Infobae.xml",h);
-        Thread t= new Thread(tc);
-        t.start();
+        Button botonleer= (Button) findViewById(R.id.btnLeer);
+        botonleer.setOnClickListener(this);
+
+
+        recycler= (RecyclerView)findViewById(R.id.list);
+        LinearLayoutManager llm= new LinearLayoutManager(this);
+        recycler.setLayoutManager(llm);
 
 
 
@@ -80,24 +92,38 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
     @Override
     public boolean handleMessage(Message msg) {
 
-
-        if (msg.obj instanceof List)
+        if (msg.arg1==1)
         {
-            List<Noticia> milista= (ArrayList)msg.obj;
-            MyAdapter a = new MyAdapter(milista,h);
-            Log.d("pruebagit","entre");
-            /*
-            for (Noticia n:milista)
-            {
-                Log.d("item", n.getFecha() + n.getTitulo() + n.getDescripcion());
+            Noticia n= milista.get(msg.arg2);
+            n.setImagenarray((Bitmap) msg.obj);
+            adap.notifyDataSetChanged();
+        }
+
+        if (msg.arg2==1)
+        {
+            if (msg.obj instanceof List) {
+                milista = (ArrayList) msg.obj;
+
+                adap= new MyAdapter(milista, h);
+                recycler.setAdapter(adap);
+                adap.notifyDataSetChanged();
+
+                return true;
+
             }
-
-
-            Log.d("lista",milista.toString());
-            */
-            return true;
 
         }
         return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        EditText texto= (EditText) findViewById(R.id.urlWeb);
+        String web="";
+        web= texto.getText().toString();
+        ThreadConexion tc = new ThreadConexion(web,h);
+        Thread t= new Thread(tc);
+        t.start();
     }
 }

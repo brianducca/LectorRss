@@ -16,8 +16,8 @@ public class Noticia {
     private Date fecha;
     private String link;
     private String urlImg;
-    public Bitmap imagenarray;
-    public byte[] a;
+    private Bitmap imagenarray;
+
 
     /**
      * Constructor por defecto
@@ -83,5 +83,13 @@ public class Noticia {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public void setImagenarray(Bitmap imagenarray) {
+        this.imagenarray = imagenarray;
+    }
+
+    public Bitmap getImagenarray() {
+        return imagenarray;
     }
 }

@@ -33,6 +33,7 @@ public class ThreadConexion implements Runnable {
 
             Message msg= new Message();
             msg.obj = noticias;
+            msg.arg2=1;
             h.sendMessage(msg);
 
         } catch (IOException e) {

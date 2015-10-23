@@ -13,13 +13,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <EditText
-                android:layout_width="235dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText"
-                android:text="Ingrese la URL del RSS" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -27,20 +22,30 @@
                 android:layout_height="wrap_content"
                 android:text="Leer"
                 android:id="@+id/btnLeer" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/urlWeb"
+                android:text="http://rss.cnn.com/rss/edition.rss"
+                android:hint="Ingrese la URL del RSS"
+                android:textSize="15dp" />
+
+
+
         </LinearLayout>
 
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical" />
-
         </LinearLayout>
+
+
     </LinearLayout>
 </RelativeLayout>

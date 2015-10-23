@@ -16,7 +16,7 @@ public class ThreadImagenes implements Runnable
     private String url;
     private Handler h;
     private int position;
-
+    private  HttpManager http;
     public ThreadImagenes(String url, Handler h, int position)
     {
         this.url = url;
@@ -25,7 +25,7 @@ public class ThreadImagenes implements Runnable
     }
     @Override
     public void run() {
-        HttpManager http =  new HttpManager(url);
+
 
         http =  new HttpManager(this.url);
         byte[] miArray = new byte[0];

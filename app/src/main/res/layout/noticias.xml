@@ -27,19 +27,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/txtfechaNoticia" />
+                android:id="@+id/txtfechaNoticia"
+                android:textSize="9dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/txttituloNoticia" />
+                android:id="@+id/txttituloNoticia"
+                android:textSize="11dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/txttextoNoticia" />
+                android:id="@+id/txttextoNoticia"
+                android:textSize="10dp" />
 
         </LinearLayout>
 

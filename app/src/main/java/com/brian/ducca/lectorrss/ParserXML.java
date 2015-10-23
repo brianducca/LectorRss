@@ -75,11 +75,18 @@ public class ParserXML
                                 Date date = null;
                                 DateFormat formatter;
                                 String fec = parser.nextText();
-                                fec = fec.substring(5,16);
-                                formatter = new SimpleDateFormat("dd MMM yyyy");
+                                fec = fec.substring(5,24);
+                                formatter = new SimpleDateFormat("dd MMM yyyy hh:mm:ss");
                                 date = formatter.parse(fec);
                                 miNoticia.setFecha(date);
                             }
+
+                            else if (tag.equals("thumbnail"))
+                            {
+                                String att= parser.getAttributeValue(null,"url");
+                                miNoticia.setUrlImg(att);
+                            }
+
 
                         }
 
